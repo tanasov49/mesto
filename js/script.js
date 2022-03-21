@@ -13,6 +13,8 @@ let textSkill =document.querySelector('.popup-form__skill');
 let profileTitle = document.querySelector('.profile__title');
 let profileSubtitle = document.querySelector('.profile__subtitle');
 let saveForm = document.querySelector('.popup-form__save-btn');
+textName.value = profileTitle.textContent;
+textSkill.value = profileSubtitle.textContent;
 function formSubmit(evt) {
     evt.preventDefault();
     profileTitle.textContent = textName.value;
