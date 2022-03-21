@@ -1,0 +1,13 @@
+.popup-form__save-btn {
+    height: 50px;
+    background: #000000;
+    border-radius: 2px;
+    margin: 48px 0 0 0;
+    color: #fff;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+.popup-form__save-btn:hover {
+    opacity: 0.6;
+}

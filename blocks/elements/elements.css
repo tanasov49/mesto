@@ -1,0 +1,9 @@
+.elements {
+    grid-column: 2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 17px;
+    justify-content: center;
+}

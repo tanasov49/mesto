@@ -1,0 +1,27 @@
+.profile__click-profile {
+    background-image: url(../../../images/Edit_Button.svg);
+    width: 24px;
+    height: 24px;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: right;
+    margin: 0 0 10px 0;
+    align-self: end;
+    box-sizing: border-box;
+    border: 1px solid #FFF;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+}
+.profile__click-profile:hover {
+    opacity: 0.6;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    .profile__click-profile {
+        grid-column: 1;
+        grid-row: 2;
+        margin: 0;
+        justify-self: center;
+        margin: 0 0 0 254px;
+    }
+}
