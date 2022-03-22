@@ -20,7 +20,6 @@
     .profile__click-profile {
         grid-column: 1;
         grid-row: 2;
-        margin: 0;
         justify-self: center;
         margin: 0 0 0 254px;
     }
