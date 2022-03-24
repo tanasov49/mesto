@@ -22,5 +22,7 @@
         grid-row: 2;
         justify-self: center;
         margin: 0 0 0 254px;
+        width: 18px;
+        height: 18px;
     }
 }

@@ -1,6 +1,7 @@
 .popup-form__save-btn {
     height: 50px;
     background: #000000;
+    border: none;
     border-radius: 2px;
     margin: 48px 0 0 0;
     color: #fff;
