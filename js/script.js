@@ -12,9 +12,9 @@ popupOpen.addEventListener('click', function() {
 
 let popupForm = document.querySelector('.popup-form');
 
-let textName = document.querySelector('.popup-form__name');
+let textName = document.querySelector('.popup-form__input_name');
 
-let textSkill =document.querySelector('.popup-form__skill');
+let textSkill =document.querySelector('.popup-form__input_skill');
 
 let profileTitle = document.querySelector('.profile__title');
 
