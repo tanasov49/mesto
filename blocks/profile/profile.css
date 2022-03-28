@@ -1,14 +1,14 @@
 .profile {
     padding: 36px 0 48px 0;
     display: grid;
-    grid-template-columns: 167px minmax(min-content, 336px) minmax(min-content, 394px);
+    grid-template-columns: 167px 336px 30px minmax(min-content, 394px);
     grid-template-rows: 64px 64px;
     border-top: 1px solid rgba(84, 84, 84, 1);
 }
 @media screen and (min-width: 320px) and (max-width: 768px) {
     .profile {
         grid-template-columns: 1fr;
-        grid-template-rows: 120px 48px 28px 86px;
+        grid-template-rows: 120px 48px 40px 86px;
         padding: 70px 0 48px 0;
     }
 }
