@@ -37,6 +37,8 @@ saveForm.addEventListener('click', function formSubmit(evt) {
         return false;
     }
 });
+
+
 // Закрытие формы без редактирования
 popupClose.addEventListener('click', function() {
     textName.value = profileTitle.textContent;
@@ -78,6 +80,10 @@ const elementsCards = [
     }
   ];
 
+  const addCard = (card) => {
+    const
+  }
+
   elementsCards.forEach(function (element) {
     const elementCard = elementTemplate.cloneNode(true);
 
@@ -111,20 +117,11 @@ let imageSrc =document.querySelector('.popup-form-card__input_type_image');
 
 let addCardForm = document.querySelector('.popup-form-card__save-btn');
 
+popupCardClose.addEventListener('click', function() {
+  popupCard.classList.remove('popup-card_opened');
+})
 
-function safeCard (evt) {
-  evt.preventDefault();
 
-  const newCard = elementTemplate.cloneNode(true);
-  newCard.querySelector('.element-item__title').textContent = titleImage.value;
-  newCard.querySelector('.element-item__image').src = imageSrc.value;
-  newCard.querySelector('.element-item__image').alt = imageSrc.value;
-  elementsList.prepend(newCard);
-  popupCardClose.addEventListener('click', function() {
-    popupCard.classList.remove('popup-card_opened');
-});
-
-}
 
  
 
