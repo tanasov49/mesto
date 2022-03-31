@@ -24,6 +24,17 @@
                     </form>
                 </div>
             </div>
+            <div class="popup-card">
+                <div class="popup-card__container">
+                    <h2 class="popup-card__title">Новое место</h2>
+                    <form name="myform" action="#" class="popup-form-card">
+                        <input type="text" class="popup-form-card__input popup-form-card__input_type_name" placeholder="Название" name="name" required>
+                        <input src="" class="popup-form-card__input popup-form-card__input_type_image" placeholder="Ссылка на картинку" name="skill" required>
+                        <button type="submit"  class="popup-form-card__save-btn">Создать</button>
+                        <button class="popup-form-card__close-btn" type="button"></button>
+                    </form>
+                </div>
+            </div>
             <section class="profile">
                 <img src="./images/profile_image.jpg" alt="Фото профиля" class="profile__image">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -33,36 +44,13 @@
             </section>
             <section class="section-images">
                 <ul class="elements">
-                    <li class="element-item">
-                        <img src="./images/kaliningrad.jpg" alt="Калининград" class="element-item__image">
-                        <h3 class="element-item__title">Калининград</h3>
-                        <button class="element-item__like" type="button"></button>
-                    </li>
-                    <li class="element-item">
-                        <img src="./images/prague.jpg" alt="Прага" class="element-item__image">
-                        <h3 class="element-item__title">Прага</h3>
-                        <button class="element-item__like" type="button"></button>
-                    </li>
-                    <li class="element-item">
-                        <img src="./images/kiev.jpg" alt="Киев" class="element-item__image">
-                        <h3 class="element-item__title">Киев</h3>
-                        <button class="element-item__like" type="button"></button>
-                    </li>
-                    <li class="element-item">
-                        <img src="./images/gdansk.jpg" alt="Гданьск" class="element-item__image">
-                        <h3 class="element-item__title">Гданьск</h3>
-                        <button class="element-item__like" type="button"></button>
-                    </li>
-                    <li class="element-item">
-                        <img src="./images/istambul.jpg" alt="Стамбул" class="element-item__image">
-                        <h3 class="element-item__title">Стамбул</h3>
-                        <button class="element-item__like" type="button"></button>
-                    </li>
-                    <li class="element-item">
-                        <img src="./images/riga.jpg" alt="Рига" class="element-item__image">
-                        <h3 class="element-item__title">Рига</h3>
-                        <button class="element-item__like" type="button"></button>
-                    </li>
+                    <template class="element-template">
+                        <li class="element-item">
+                            <img class="element-item__image">
+                            <h3 class="element-item__title"></h3>
+                            <button class="element-item__like" type="button"></button>
+                        </li>
+                    </template>
                 </ul>
             </section>
         </main>
