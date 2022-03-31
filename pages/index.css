@@ -27,6 +27,7 @@
 @import url(../blocks/popup-form-card/__close-btn/popup-form-card__close-btn.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__image/profile__image.css);
+@import url(../blocks/element-item/__image/_open/element-item__image_open.css);
 @import url(../blocks/profile/__title/profile__title.css);
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/profile/__click-profile/profile__click-profile.css);
