@@ -81,6 +81,15 @@ const elementsCards = [
     elementsCard.querySelector('.element-item__image').src = card.link;
     elementsCard.querySelector('.element-item__image').alt = card.name;
     elementsCard.querySelector('.element-item__title').textContent = card.name;
+
+    elementsCard.querySelector('.element-item__like').addEventListener('click', (evt) => {
+      evt.target.classList.toggle('element-item__like_active');
+    })
+
+    elementsCard.querySelector('.element-item__trash').addEventListener('click', (evt) => {
+      elementsCard.remove();
+    })
+
     return elementsCard;
   }
   const newElements = elementsCards.map(function(card) {
@@ -130,3 +139,4 @@ const addCard = (evt) => {
 }
 elements.append(...newElements);
 popupCard.addEventListener('submit', addCard );
+
