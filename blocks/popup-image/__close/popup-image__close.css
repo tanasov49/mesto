@@ -1,0 +1,13 @@
+.popup-image__close {
+    background-image: url(../../../images/close_btn.svg);
+    width: 32px;
+    height: 32px;
+    position: relative;
+    background-color: transparent;
+    background-position: center;
+    outline: none;
+    border: none;
+    position: absolute;
+    right: -40px;
+    top: -40px;
+}

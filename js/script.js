@@ -1,22 +1,23 @@
 //Открытие формы для редактирования
-let popupOpen = document.querySelector('.profile__click-profile');
+const popupOpen = document.querySelector('.profile__click-profile');
 
-let popupClose = document.querySelector('.popup-form__close-btn');
+const popupClose = document.querySelector('.popup-form__close-btn');
 
-let popup = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
 
 // Редактирование формы
-let popupForm = document.querySelector('.popup-form');
+const popupForm = document.querySelector('.popup-form');
 
-let textName = document.querySelector('.popup-form__input_type_name');
+const textName = document.querySelector('.popup-form__input_type_name');
 
-let textSkill =document.querySelector('.popup-form__input_type_skill');
+const textSkill =document.querySelector('.popup-form__input_type_skill');
 
-let profileTitle = document.querySelector('.profile__title');
+const profileTitle = document.querySelector('.profile__title');
 
-let profileSubtitle = document.querySelector('.profile__subtitle');
+const profileSubtitle = document.querySelector('.profile__subtitle');
 
-let saveForm = document.querySelector('.popup-form__save-btn');
+const saveForm = document.querySelector('.popup-form__save-btn');
+
 
 
 popupOpen.addEventListener('click', function() {
@@ -88,6 +89,25 @@ const elementsCards = [
 
     elementsCard.querySelector('.element-item__trash').addEventListener('click', (evt) => {
       elementsCard.remove();
+    })
+    const imagePopup = document.querySelector('.popup-image');
+    const imageFullscreen = imagePopup.querySelector('.popup-image__fullscreen');
+    const imageTitle = imagePopup.querySelector('.popup-image__title');
+    const closeImage = imagePopup.querySelector('.popup-image__close');
+    const imageFullscreenClick = elementsCard.querySelector('.element-item__image');
+
+
+    imageFullscreenClick.addEventListener('click', function() {
+      imagePopup.classList.add('popup-image_open')
+    })
+    closeImage.addEventListener('click', function() {
+      imagePopup.classList.remove('popup-image_open')
+    })
+
+    imageFullscreenClick.addEventListener('click', () => {
+      imageFullscreen.src = card.link;
+      imageFullscreen.alt = card.name;
+      imageTitle.textContent = card.name;
     })
 
     return elementsCard;
