@@ -8,5 +8,5 @@
     display: flex;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.5s linear
+    transition: opacity 0.5s linear;
 }
