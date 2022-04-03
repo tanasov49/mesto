@@ -23,7 +23,7 @@ const btnSafeForm = document.querySelector('.popup-form__save-btn_profile');
 
 const titleInputCard = document.querySelector('.popup-form__input_type_place');
 
-const imageInputCard = document.querySelector('.popup-form__input_input_type_url');
+const imageInputCard = document.querySelector('.popup-form__input_type_url');
 btnEditProfile.addEventListener('click', () => {
   textName.value = profileTitle.textContent;
   textSkill.value = profileSubtitle.textContent;
@@ -77,9 +77,8 @@ btnSafeForm.addEventListener('click', function formSubmit(evt) {
       elementsCard.remove();
     })
 
-
     imageFullscreenClick.addEventListener('click', () => {
-      imageFullscreen.src = card.link;
+      imageFullscreen.link = card.link;
       imageFullscreen.alt = card.name;
       imageTitle.textContent = card.name;
       openPopup(imagePopup);
@@ -91,9 +90,7 @@ btnSafeForm.addEventListener('click', function formSubmit(evt) {
 
     return elementsCard;
   }
-  const addNewElements = elementsCards.map(function(card) {
-    return addCardsMassive(card);
-  })
+
   const addNewCard = (card) => {
     elements.prepend(addCardsMassive(card));
   }
@@ -105,10 +102,14 @@ const addCard = (evt) => {
     card.name = titleInputCard.value;
     card.link = imageInputCard.value;
     addNewCard(card);
+    closePopup(popupAddCard);
     titleInputCard.value = "";
     imageInputCard.value = "";
-    closePopup(popupAddCard);
 }
+
+const addNewElements = elementsCards.map(card => {
+  return addCardsMassive(card);
+});
 
 elements.append(...addNewElements);
 popupAddCard.addEventListener('submit', addCard);
