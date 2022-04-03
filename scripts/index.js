@@ -23,7 +23,7 @@ const btnSafeForm = document.querySelector('.popup-form__save-btn_profile');
 
 const titleInputCard = document.querySelector('.popup-form__input_type_place');
 
-const imageInputCard = document.querySelector('.popup-form__input_type_place_url');
+const imageInputCard = document.querySelector('.popup-form__input_input_type_url');
 btnEditProfile.addEventListener('click', () => {
   textName.value = profileTitle.textContent;
   textSkill.value = profileSubtitle.textContent;
