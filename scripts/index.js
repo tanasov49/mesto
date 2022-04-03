@@ -61,10 +61,10 @@ btnSafeForm.addEventListener('click', function formSubmit(evt) {
     const elementsCard = elementsList.content.querySelector('.element-item').cloneNode(true);
     const imageCard = elementsCard.querySelector('.element-item__image');
     const titleCard = elementsCard.querySelector('.element-item__title');
-    const imagePopup = document.querySelector('.popup-image');
-    const imageFullscreen = imagePopup.querySelector('.popup-image__fullscreen');
+    const imagePopup = document.querySelector('.popup_image');
+    const imageFullscreen = imagePopup.querySelector('.popup-image__fullscreen-image');
     const imageTitle = imagePopup.querySelector('.popup-image__title');
-    const closeImage = imagePopup.querySelector('.popup-image__close');
+    const btnCloseImage = imagePopup.querySelector('.popup-image__close');
     const imageFullscreenClick = elementsCard.querySelector('.element-item__image');
     imageCard.src = card.link;
     imageCard.alt = card.name;
@@ -72,20 +72,21 @@ btnSafeForm.addEventListener('click', function formSubmit(evt) {
     elementsCard.querySelector('.element-item__like').addEventListener('click', (evt) => {
       evt.target.classList.toggle('element-item__like_active');
     })
+
     elementsCard.querySelector('.element-item__trash').addEventListener('click', (evt) => {
       elementsCard.remove();
     })
-    imageFullscreenClick.addEventListener('click', function() {
-      imagePopup.classList.add('popup-image_open')
-    })
-    closeImage.addEventListener('click', function() {
-      imagePopup.classList.remove('popup-image_open')
-    })
+
 
     imageFullscreenClick.addEventListener('click', () => {
       imageFullscreen.src = card.link;
       imageFullscreen.alt = card.name;
       imageTitle.textContent = card.name;
+      openPopup(imagePopup);
+    })
+
+    btnCloseImage.addEventListener('click', function() {
+      closePopup(imagePopup);
     })
 
     return elementsCard;
