@@ -1,4 +1,4 @@
-//Открытие формы для редактирования
+//Открытие popup для редактирования
 const btnEditProfile = document.querySelector('.profile__click-profile');
 
 const popupClose = document.querySelector('.popup-form__close-btn');
@@ -42,7 +42,7 @@ btnFormCard.addEventListener('click', () => {
 popupCloseCard.addEventListener('click', () => {
   closePopup(popupAddCard);
 })
-
+//Внесение данных в профиль
 btnSafeForm.addEventListener('click', function formSubmit(evt) {
     if (textName.value !== "" && textSkill.value !== "") {
         evt.preventDefault();
@@ -53,47 +53,53 @@ btnSafeForm.addEventListener('click', function formSubmit(evt) {
         return false;
     }
 });
-  //Добавление карточек из массива
-  const elements = document.querySelector('.elements');
+//Добавление карточек из массива
+const elements = document.querySelector('.elements');
 
-  const addCardsMassive = (card) => {
-    const elementsList = document.querySelector('.element-template');
-    const elementsCard = elementsList.content.querySelector('.element-item').cloneNode(true);
-    const imageCard = elementsCard.querySelector('.element-item__image');
-    const titleCard = elementsCard.querySelector('.element-item__title');
-    const imagePopup = document.querySelector('.popup_image');
-    const imageFullscreen = imagePopup.querySelector('.popup-image__fullscreen-image');
-    const imageTitle = imagePopup.querySelector('.popup-image__title');
-    const btnCloseImage = imagePopup.querySelector('.popup-image__close');
-    const imageFullscreenClick = elementsCard.querySelector('.element-item__image');
-    imageCard.src = card.link;
-    imageCard.alt = card.name;
-    titleCard.textContent = card.name;
-    elementsCard.querySelector('.element-item__like').addEventListener('click', (evt) => {
-      evt.target.classList.toggle('element-item__like_active');
-    })
+const addCardsMassive = (card) => {
+  //Константы для внесения данныъ из массива
+  const elementsList = document.querySelector('.element-template');
+  const elementsCard = elementsList.content.querySelector('.element-item').cloneNode(true);
+  const imageCard = elementsCard.querySelector('.element-item__image');
+  const titleCard = elementsCard.querySelector('.element-item__title');
+  //Константы для увелечения картинки
+  const imagePopup = document.querySelector('.popup_image');
+  const imageFullscreen = imagePopup.querySelector('.popup-image__fullscreen-image');
+  const imageTitle = imagePopup.querySelector('.popup-image__title');
+  const btnCloseImage = imagePopup.querySelector('.popup-image__close');
+  const imageFullscreenClick = elementsCard.querySelector('.element-item__image');
+  //Кнопки лайка
+  const likeActive = elementsCard.querySelector('.element-item__like');
+  const likeDisable = elementsCard.querySelector('.element-item__trash');
+  imageCard.src = card.link;
+  imageCard.alt = card.name;
+  titleCard.textContent = card.name;
 
-    elementsCard.querySelector('.element-item__trash').addEventListener('click', (evt) => {
-      elementsCard.remove();
-    })
+  //включение и выключение лайка
+  likeActive.addEventListener('click', (evt) => {
+    evt.target.classList.toggle('element-item__like_active');
+  })
+  likeDisable.addEventListener('click', (evt) => {
+    elementsCard.remove();
+  })
+  //Внесение данных из массива
+  imageFullscreenClick.addEventListener('click', () => {
+     imageFullscreen.src = card.link;
+     imageFullscreen.alt = card.name;
+     imageTitle.textContent = card.name;
+     openPopup(imagePopup);
+  })
+  //Закрытие полноэкранного изображения
+  btnCloseImage.addEventListener('click', function() {
+    closePopup(imagePopup);
+  })
 
-    imageFullscreenClick.addEventListener('click', () => {
-      imageFullscreen.src = card.link;
-      imageFullscreen.alt = card.name;
-      imageTitle.textContent = card.name;
-      openPopup(imagePopup);
-    })
+  return elementsCard;
+}
 
-    btnCloseImage.addEventListener('click', function() {
-      closePopup(imagePopup);
-    })
-
-    return elementsCard;
-  }
-
-  const addNewCard = (card) => {
-    elements.prepend(addCardsMassive(card));
-  }
+const addNewCard = (card) => {
+  elements.prepend(addCardsMassive(card));
+}
 
 //Вставка карточек
 const addCard = (evt) => {
@@ -114,11 +120,12 @@ const addNewElements = elementsCards.map(card => {
 elements.append(...addNewElements);
 popupAddCard.addEventListener('submit', addCard);
 
+//Открытие popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('click', null);
 }
-
+//Закрытие popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.addEventListener('click', null);
