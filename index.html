@@ -9,39 +9,39 @@
 </head>
 <body>
     <div class="page">
+        <div class="popup popup_edit-profile">
+            <div class="popup__container">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form name="myform" action="#" class="popup-form">
+                    <input type="text" class="popup-form__input popup-form__input_type_name" placeholder="Имя" name="name" required>
+                    <input type="text" class="popup-form__input popup-form__input_type_skill" placeholder="Навык" name="skill" required>
+                    <button type="submit"  class="popup-form__save-btn popup-form__save-btn_profile">Сохранить</button>
+                    <button class="popup-form__close-btn" type="button"></button>
+                </form>
+            </div>
+        </div>
+        <div class="popup popup_add-card">
+            <div class="popup__container">
+                <h2 class="popup__title">Новое место</h2>
+                <form name="form_add_card" action="#" class="popup-form">
+                    <input type="text" class="popup-form__input popup-form__input_type_place" placeholder="Название" name="place" required>
+                    <input type="url" class="popup-form__input popup-form__input_type_place_url" placeholder="Ссылка на картинку" name="skill" required>
+                    <button type="submit"  class="popup-form__save-btn popup-form__save-btn_card">Создать</button>
+                    <button class="popup-form__close-btn popup-form__close-btn_card" type="button"></button>
+                </form>
+            </div>
+        </div>
+        <div class="popup-image">
+            <div class="popup-image__container">
+                <img src="#" alt="Картинка открытия" class="popup-image__fullscreen">
+                <h3 class="popup-image__title"></h3>
+                <button class="popup-image__close"></button>
+            </div>
+        </div>
         <header class="header">
             <img src="./images/logo.svg" alt="Логотип" class="logo logo_header">
         </header>
         <main class="main">
-            <div class="popup popup_edit-profile">
-                <div class="popup__container">
-                    <h2 class="popup__title">Редактировать профиль</h2>
-                    <form name="myform" action="#" class="popup-form">
-                        <input type="text" class="popup-form__input popup-form__input_type_name" placeholder="Имя" name="name" required>
-                        <input type="text" class="popup-form__input popup-form__input_type_skill" placeholder="Навык" name="skill" required>
-                        <button type="submit"  class="popup-form__save-btn popup-form__save-btn_profile">Сохранить</button>
-                        <button class="popup-form__close-btn" type="button"></button>
-                    </form>
-                </div>
-            </div>
-            <div class="popup popup_add-card">
-                <div class="popup__container">
-                    <h2 class="popup__title">Новое место</h2>
-                    <form name="form_add_card" action="#" class="popup-form">
-                        <input type="text" class="popup-form__input popup-form__input_type_place" placeholder="Название" name="place" required>
-                        <input type="url" class="popup-form__input popup-form__input_type_place_url" placeholder="Ссылка на картинку" name="skill" required>
-                        <button type="submit"  class="popup-form__save-btn popup-form__save-btn_card">Создать</button>
-                        <button class="popup-form__close-btn popup-form__close-btn_card" type="button"></button>
-                    </form>
-                </div>
-            </div>
-            <div class="popup-image">
-                <div class="popup-image__container">
-                    <img src="#" alt="Картинка открытия" class="popup-image__fullscreen">
-                    <h3 class="popup-image__title"></h3>
-                    <button class="popup-image__close"></button>
-                </div>
-            </div>
             <section class="profile">
                 <img src="./images/profile_image.jpg" alt="Фото профиля" class="profile__image">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -51,14 +51,6 @@
             </section>
             <section class="section-images">
                 <ul class="elements">
-                    <template class="element-template">
-                        <li class="element-item">
-                            <img src="#" class="element-item__image" alt="Название картинки">
-                            <h3 class="element-item__title"></h3>
-                            <button class="element-item__like" type="button"></button>
-                            <button class="element-item__trash" type="button"></button>
-                        </li>
-                    </template>
                 </ul>
             </section>
         </main>
@@ -66,7 +58,15 @@
             <p class="footer__copyright">&#169; 2022 Mesto Russia</p>
         </footer>
     </div>
-    <script src="./js/cards.js"></script>
-    <script src="./js/script.js"></script>
+    <template class="element-template">
+        <li class="element-item">
+            <img src="#" class="element-item__image" alt="Название картинки">
+            <h3 class="element-item__title"></h3>
+            <button class="element-item__like" type="button"></button>
+            <button class="element-item__trash" type="button"></button>
+        </li>
+    </template>
+    <script src="./scripts/cards.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

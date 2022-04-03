@@ -11,8 +11,6 @@ const btnFormCard = document.querySelector('.profile__add-element');
 
 const popupAddCard = document.querySelector('.popup_add-card');
 
-// Редактирование формы
-
 const textName = document.querySelector('.popup-form__input_type_name');
 
 const textSkill =document.querySelector('.popup-form__input_type_skill');
@@ -21,7 +19,7 @@ const profileTitle = document.querySelector('.profile__title');
 
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
-const safeFormProfile = document.querySelector('.popup-form__save-btn_profile');
+const btnSafeForm = document.querySelector('.popup-form__save-btn_profile');
 
 const titleInputCard = document.querySelector('.popup-form__input_type_place');
 
@@ -45,7 +43,7 @@ popupCloseCard.addEventListener('click', () => {
   closePopup(popupAddCard);
 })
 
-safeFormProfile.addEventListener('click', function formSubmit(evt) {
+btnSafeForm.addEventListener('click', function formSubmit(evt) {
     if (textName.value !== "" && textSkill.value !== "") {
         evt.preventDefault();
         profileTitle.textContent = textName.value;
@@ -57,7 +55,6 @@ safeFormProfile.addEventListener('click', function formSubmit(evt) {
 });
   //Добавление карточек из массива
   const elements = document.querySelector('.elements');
-
 
   const addCardsMassive = (card) => {
     const elementsList = document.querySelector('.element-template');
@@ -93,42 +90,36 @@ safeFormProfile.addEventListener('click', function formSubmit(evt) {
 
     return elementsCard;
   }
-  const newElements = elementsCards.map(function(card) {
+  const addNewElements = elementsCards.map(function(card) {
     return addCardsMassive(card);
   })
-  const newCard = (card) => {
+  const addNewCard = (card) => {
     elements.prepend(addCardsMassive(card));
   }
+
 //Вставка карточек
-
-
 const addCard = (evt) => {
-  if (titleInputCard.value !== "" && imageInputCard.value !== "") {
     evt.preventDefault();
     const card = {};
     card.name = titleInputCard.value;
     card.link = imageInputCard.value;
-    newCard(card);
+    addNewCard(card);
     titleInputCard.value = "";
     imageInputCard.value = "";
     closePopup(popupAddCard);
-  } else {
-    return false;
-  }
-
 }
 
-elements.append(...newElements);
+elements.append(...addNewElements);
 popupAddCard.addEventListener('submit', addCard);
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keyup', onDocumentKeyUp);
+  document.addEventListener('click', null);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.addEventListener('keyup', onDocumentKeyUp);
+  document.addEventListener('click', null);
 }
 
 
