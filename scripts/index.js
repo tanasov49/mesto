@@ -78,7 +78,7 @@ btnSafeForm.addEventListener('click', function formSubmit(evt) {
     })
 
     imageFullscreenClick.addEventListener('click', () => {
-      imageFullscreen.link = card.link;
+      imageFullscreen.src = card.link;
       imageFullscreen.alt = card.name;
       imageTitle.textContent = card.name;
       openPopup(imagePopup);
