@@ -1,17 +1,21 @@
 //Открытие popup для редактирования
 const btnEditProfile = document.querySelector('.profile__click-profile');
 
-const popupClose = document.querySelector('.popup-form__close-btn');
-
-const popupCloseCard = document.querySelector('.popup-form__close-btn_card');
+const popupClose = document.querySelector('.popup__close');
 
 const popupEditProfile = document.querySelector('.popup_edit-profile');
+
+const popupAddCard = document.querySelector('.popup_add-card');
+
+const popupCloseCard = popupAddCard.querySelector('.popup__close');
+
+const imagePopup = document.querySelector('.popup_image');
+
+const btnCloseImage = imagePopup.querySelector('.popup__close');
 
 const popupForm = document.querySelector('.popup__container');
 
 const btnFormCard = document.querySelector('.profile__add-element');
-
-const popupAddCard = document.querySelector('.popup_add-card');
 
 const textName = document.querySelector('.popup-form__input_type_name');
 
@@ -27,17 +31,25 @@ const titleInputCard = document.querySelector('.popup-form__input_type_place');
 
 const imageInputCard = document.querySelector('.popup-form__input_type_url');
 
+const elements = document.querySelector('.elements');
+
 const elementsList = document.querySelector('.element-template');
 
-const imagePopup = document.querySelector('.popup_image');
+
+
 //Добавление карточек из массива
-const elements = document.querySelector('.elements');
+
 
 
 btnEditProfile.addEventListener('click', () => {
   textName.value = profileTitle.textContent;
   textSkill.value = profileSubtitle.textContent;
   openPopup(popupEditProfile);
+})
+
+
+popupClose.addEventListener('click', () => {
+  closePopup(popupEditProfile);
 })
 
 btnFormCard.addEventListener('click', () => {
@@ -48,6 +60,10 @@ popupCloseCard.addEventListener('click', () => {
   closePopup(popupAddCard);
 })
 
+btnCloseImage.addEventListener('click', function() {
+  closePopup(imagePopup);
+})
+
 function formEditProfile(evt) {
   evt.preventDefault();
   profileTitle.textContent = textName.value;
@@ -55,9 +71,7 @@ function formEditProfile(evt) {
   closePopup(popupEditProfile);
 }
 
-popupClose.addEventListener('click', () => {
-  closePopup(popupEditProfile);
-})
+
 
 popupForm.addEventListener('submit', formEditProfile);
 
@@ -67,7 +81,6 @@ const createCard = (card) => {
   const titleCard = elementsCard.querySelector('.element-item__title');
   const imageFullscreen = imagePopup.querySelector('.popup-image__fullscreen-image');
   const imageTitle = imagePopup.querySelector('.popup-image__title');
-  const btnCloseImage = imagePopup.querySelector('.popup-image__close');
   const imageFullscreenClick = elementsCard.querySelector('.element-item__image');
   //Кнопки лайка
   const likeActive = elementsCard.querySelector('.element-item__like');
@@ -91,9 +104,7 @@ const createCard = (card) => {
      openPopup(imagePopup);
   })
   //Закрытие полноэкранного изображения
-  btnCloseImage.addEventListener('click', function() {
-    closePopup(imagePopup);
-  })
+
 
   return elementsCard;
 }
