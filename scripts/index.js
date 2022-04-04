@@ -6,24 +6,39 @@ const openPopup = (popup) => {
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
 }
+//Кнопка профиля
 const btnEditProfile = document.querySelector(".profile__click-profile");
+//Кнопка закрытия
 const popupClose = document.querySelector(".popup__close");
+//Контейнер профиля
 const popupEditProfile = document.querySelector(".popup_edit-profile");
+//Контейнер карточки
 const popupAddCard = document.querySelector(".popup_add-card");
+//Кнопка закрытия карточки
 const popupCloseCard = popupAddCard.querySelector(".popup__close");
+//Контейнер раскрытия фото
 const imagePopup = document.querySelector(".popup_image");
+//Перенос фото
 const imageFullscreen = imagePopup.querySelector(".popup-image__fullscreen-image");
+//Перенос названия
 const imageTitle = imagePopup.querySelector(".popup-image__title");
+//Закрытие фото
 const btnCloseImage = imagePopup.querySelector(".popup__close");
+//Событие отправки
 const popupForm = document.querySelector(".popup__container");
+//Добавление карточки
 const btnFormCard = document.querySelector(".profile__add-element");
+//Переменные профиля
 const textName = document.querySelector(".popup-form__input_type_name");
 const textSkill = document.querySelector(".popup-form__input_type_skill");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
+//Сохранение профиля
 const btnSafeForm = document.querySelector(".popup-form__save-btn_profile");
+//Переменные для внесения данных в массив карточек с фото
 const titleInputCard = document.querySelector(".popup-form__input_type_place");
 const imageInputCard = document.querySelector(".popup-form__input_type_url");
+//Блок карточек
 const elements = document.querySelector(".elements");
 const templateElement = document.querySelector(".element-template");
 
@@ -33,16 +48,19 @@ btnEditProfile.addEventListener("click", () => {
   textSkill.value = profileSubtitle.textContent;
   openPopup(popupEditProfile);
 });
-//Открытие popup
+//Закрытие редактирования профиля
 popupClose.addEventListener("click", () => {
   closePopup(popupEditProfile);
 });
+//Открытие формы добавления карточки
 btnFormCard.addEventListener("click", () => {
   openPopup(popupAddCard);
 });
+//Закртытие без добавления карточки
 popupCloseCard.addEventListener("click", () => {
   closePopup(popupAddCard);
 });
+//Закрытие полноэкранного изображения
 btnCloseImage.addEventListener("click", function () {
   closePopup(imagePopup);
 });
