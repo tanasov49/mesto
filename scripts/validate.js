@@ -1,10 +1,11 @@
+//Отображение ошибок в теге Span
 const showInputError = (formElement, inputElement, errorMessage, obj) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(obj.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(obj.errorTextClass);
 }
-
+//Удаление ошибок в теге Span
 const hideInputError = (formElement, inputElement, obj) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(obj.inputErrorClass);
@@ -17,15 +18,16 @@ const hasInvalidInput = (inputList) => {
     return !inputElement.validity.valid;
   });
 };
+// Активация и деактивация кнопки отправить
+const disableButtonElement = (buttonElement, obj) => {
+  buttonElement.classList.add(obj.inactiveButtonClass);
+  buttonElement.disabled = true;
+}
+const activeButtonElement = (buttonElement, obj) => {
+  buttonElement.classList.remove(obj.inactiveButtonClass);
+  buttonElement.disabled = false;
+}
 const toggleButtonState = (inputList, buttonElement, obj) => {
-  const disableButtonElement = (buttonElement, obj) => {
-    buttonElement.classList.add(obj.inactiveButtonClass);
-    buttonElement.disabled = true;
-  }
-  const activeButtonElement = (buttonElement, obj) => {
-    buttonElement.classList.remove(obj.inactiveButtonClass);
-    buttonElement.disabled = false;
-  }
   if (hasInvalidInput(inputList)) {
     disableButtonElement(buttonElement, obj);
   } else {
@@ -69,5 +71,5 @@ const enableValidation = (obj) => {
   submitButtonSelector: '.popup-form__save-btn',
   inactiveButtonClass: 'popup-form__save-btn_disabled',
   inputErrorClass: 'popup-form__input_error',
-  errorTextClass: 'popup-form__input-error_active'
+  errorTextClass: 'popup-form__input-error_active',
 });

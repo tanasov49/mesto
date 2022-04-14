@@ -27,6 +27,10 @@ const btnEditProfile = document.querySelector(".profile__click-profile");
 const popupClose = document.querySelector(".popup__close");
 //Контейнер профиля
 const popupEditProfile = document.querySelector(".popup_edit-profile");
+//Кнопка сохранения профиля
+const btnSafeProfile =document.querySelector('.popup-form__save-btn_profile');
+//Кнопка сохранения карточки
+const btnSafeCard =document.querySelector('.popup-form__save-btn_card');
 //Контейнер карточки
 const popupAddCard = document.querySelector(".popup_add-card");
 //Кнопка закрытия карточки
@@ -56,13 +60,6 @@ const imageInputCard = document.querySelector(".popup-form__input_type_url");
 //Блок карточек
 const elements = document.querySelector(".elements");
 const templateElement = document.querySelector(".element-template");
-
-//Добавление карточек из массива
-btnEditProfile.addEventListener("click", () => {
-  textName.value = profileTitle.textContent;
-  textSkill.value = profileSubtitle.textContent;
-  openPopup(popupEditProfile);
-});
 //Закрытие редактирования профиля
 popupClose.addEventListener("click", () => {
   closePopup(popupEditProfile);
@@ -70,6 +67,7 @@ popupClose.addEventListener("click", () => {
 //Открытие формы добавления карточки
 btnFormCard.addEventListener("click", () => {
   openPopup(popupAddCard);
+  disableButtonElement(btnSafeCard, enableValidation);
 });
 //Закртытие без добавления карточки
 popupCloseCard.addEventListener("click", () => {
@@ -84,7 +82,16 @@ popupEditProfile.addEventListener('click', closeOverlayPopup);
 popupAddCard.addEventListener('click', closeOverlayPopup);
 imagePopup.addEventListener('click', closeOverlayPopup);
 //Редатирование профиля
-function handleSubmitProfileForm(evt) {
+const editProfile = () => {
+  textName.value = profileTitle.textContent;
+  textSkill.value = profileSubtitle.textContent;
+  activeButtonElement(btnSafeProfile, enableValidation);
+  openPopup(popupEditProfile);
+}
+btnEditProfile.addEventListener("click", () => {
+  editProfile();
+});
+const handleSubmitProfileForm = (evt) => {
   evt.preventDefault();
   profileTitle.textContent = textName.value;
   profileSubtitle.textContent = textSkill.value;
@@ -129,10 +136,11 @@ const addCard = (evt) => {
   const card = {};
   card.name = titleInputCard.value;
   card.link = imageInputCard.value;
-  addNewCard(card);
-  closePopup(popupAddCard);
   titleInputCard.value = "";
   imageInputCard.value = "";
+  addNewCard(card);
+  closePopup(popupAddCard);
+
 };
 const addNewElements = elementsCards.map((card) => {
   return createCard(card);
