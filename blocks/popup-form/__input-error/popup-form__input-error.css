@@ -1,0 +1,12 @@
+.popup-form__input-error {
+    position: absolute;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    opacity: 0;
+    top: calc(40% + 4px);
+}
+.popup-form__input-error:last-of-type {
+    top: calc(60% + 6px);
+}

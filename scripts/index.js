@@ -1,10 +1,25 @@
+//Закрытие по клавише ESC
+const closeKeyEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+//Закрытие в пустой области кликом
+const closeOverlayPopup = (evt) => {
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target);
+  }
+}
 //Открытие popup
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
+  document.addEventListener ('keyup', closeKeyEsc);
 }
 //Закрытие popup
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
+  document.removeEventListener ('keyup', closeKeyEsc);
 }
 //Кнопка профиля
 const btnEditProfile = document.querySelector(".profile__click-profile");
@@ -64,6 +79,10 @@ popupCloseCard.addEventListener("click", () => {
 btnCloseImage.addEventListener("click", function () {
   closePopup(imagePopup);
 });
+// Закрытие в оверлайле пустой области
+popupEditProfile.addEventListener('click', closeOverlayPopup);
+popupAddCard.addEventListener('click', closeOverlayPopup);
+imagePopup.addEventListener('click', closeOverlayPopup);
 //Редатирование профиля
 function handleSubmitProfileForm(evt) {
   evt.preventDefault();
@@ -120,3 +139,4 @@ const addNewElements = elementsCards.map((card) => {
 });
 elements.append(...addNewElements);
 popupAddCard.addEventListener("submit", addCard);
+

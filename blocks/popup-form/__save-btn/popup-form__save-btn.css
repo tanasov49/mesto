@@ -8,6 +8,7 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
+    box-sizing: border-box;
 }
 .popup-form__save-btn:hover {
     opacity: 0.6;
