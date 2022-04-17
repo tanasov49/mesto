@@ -35,6 +35,7 @@ const btnSafeProfile =document.querySelector('.popup-form__save-btn_profile');
 const btnSafeCard =document.querySelector('.popup-form__save-btn_card');
 //Контейнер карточки
 const popupAddCard = document.querySelector(".popup_add-card");
+const formPopupCard = document.querySelector('.popup-form_card');
 //Кнопка закрытия карточки
 const popupCloseCard = popupAddCard.querySelector(".popup__close");
 //Контейнер раскрытия фото
@@ -46,7 +47,7 @@ const imageTitle = imagePopup.querySelector(".popup-image__title");
 //Закрытие фото
 const btnCloseImage = imagePopup.querySelector(".popup__close");
 //Событие отправки
-const popupForm = document.querySelector(".popup__container");
+const popupForm = document.querySelector(".popup-form");
 //Добавление карточки
 const btnFormCard = document.querySelector(".profile__add-element");
 //Переменные профиля
@@ -63,13 +64,22 @@ const imageInputCard = document.querySelector(".popup-form__input_type_url");
 const elements = document.querySelector(".elements");
 const templateElement = document.querySelector(".element-template");
 //Закрытие редактирования профиля
+
+const validationConfig = {
+  formSelector: '.popup-form',
+  inputSelector: '.popup-form__input',
+  submitButtonSelector: '.popup-form__save-btn',
+  inactiveButtonClass: 'popup-form__save-btn_disabled',
+  inputErrorClass: 'popup-form__input_error',
+  errorTextClass: 'popup-form__input-error_active'
+};
 popupClose.addEventListener("click", () => {
   closePopup(popupEditProfile);
 });
 //Открытие формы добавления карточки
 btnFormCard.addEventListener("click", () => {
   openPopup(popupAddCard);
-  disableButtonElement(btnSafeCard, enableValidation);
+  disableButtonElement(btnSafeCard, validationConfig);
 });
 //Закртытие без добавления карточки
 popupCloseCard.addEventListener("click", () => {
@@ -83,7 +93,7 @@ btnCloseImage.addEventListener("click", function () {
 const editProfile = () => {
   textName.value = profileTitle.textContent;
   textSkill.value = profileSubtitle.textContent;
-  activeButtonElement(btnSafeProfile, enableValidation);
+  activeButtonElement(btnSafeProfile, validationConfig);
   openPopup(popupEditProfile);
 }
 btnEditProfile.addEventListener("click", () => {
@@ -101,7 +111,6 @@ const createCard = (card) => {
   const elementsCard = templateElement.content.querySelector(".element-item").cloneNode(true);
   const imageCard = elementsCard.querySelector(".element-item__image");
   const titleCard = elementsCard.querySelector(".element-item__title");
-
   const imageFullscreenClick = elementsCard.querySelector(".element-item__image");
   //Кнопки лайка
   const likeButton = elementsCard.querySelector(".element-item__like");
@@ -134,15 +143,13 @@ const addCard = (evt) => {
   const card = {};
   card.name = titleInputCard.value;
   card.link = imageInputCard.value;
-  titleInputCard.value = "";
-  imageInputCard.value = "";
   addNewCard(card);
   closePopup(popupAddCard);
-
+  formPopupCard.reset();
 };
 const addNewElements = elementsCards.map((card) => {
   return createCard(card);
 });
 elements.append(...addNewElements);
-popupAddCard.addEventListener("submit", addCard);
+formPopupCard.addEventListener("submit", addCard);
 
