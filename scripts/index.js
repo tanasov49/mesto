@@ -14,12 +14,14 @@ const closeOverlayPopup = (evt) => {
 //Открытие popup
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
-  document.addEventListener ('keyup', closeKeyEsc);
+  document.addEventListener('keyup', closeKeyEsc);
+  document.addEventListener('click', closeOverlayPopup);
 }
 //Закрытие popup
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
-  document.removeEventListener ('keyup', closeKeyEsc);
+  document.removeEventListener('keyup', closeKeyEsc);
+  document.removeEventListener('click', closeOverlayPopup);
 }
 //Кнопка профиля
 const btnEditProfile = document.querySelector(".profile__click-profile");
@@ -77,10 +79,6 @@ popupCloseCard.addEventListener("click", () => {
 btnCloseImage.addEventListener("click", function () {
   closePopup(imagePopup);
 });
-// Закрытие в оверлайле пустой области
-popupEditProfile.addEventListener('click', closeOverlayPopup);
-popupAddCard.addEventListener('click', closeOverlayPopup);
-imagePopup.addEventListener('click', closeOverlayPopup);
 //Редатирование профиля
 const editProfile = () => {
   textName.value = profileTitle.textContent;
