@@ -1,7 +1,8 @@
 .popup-form__save-btn_disabled {
     border: 1px solid #000;
     opacity: 0.2;
+    cursor: pointer;
 }
 .popup-form__save-btn_disabled:hover {
-    opacity: 0.6;
+    opacity: 0.8;
 }
