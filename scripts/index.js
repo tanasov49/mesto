@@ -1,3 +1,4 @@
+import { elementsCards, Card} from './cards.js';
 //Закрытие по клавише ESC
 const closeKeyEsc = (evt) => {
   if (evt.key === 'Escape') {
@@ -40,10 +41,6 @@ const formPopupCard = document.querySelector('.popup-form_card');
 const popupCloseCard = popupAddCard.querySelector(".popup__close");
 //Контейнер раскрытия фото
 const imagePopup = document.querySelector(".popup_image");
-//Перенос фото
-const imageFullscreen = imagePopup.querySelector(".popup-image__fullscreen-image");
-//Перенос названия
-const imageTitle = imagePopup.querySelector(".popup-image__title");
 //Закрытие фото
 const btnCloseImage = imagePopup.querySelector(".popup__close");
 //Событие отправки
@@ -55,8 +52,6 @@ const textName = document.querySelector(".popup-form__input_type_name");
 const textSkill = document.querySelector(".popup-form__input_type_skill");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubtitle = document.querySelector(".profile__subtitle");
-//Сохранение профиля
-const btnSafeForm = document.querySelector(".popup-form__save-btn_profile");
 //Переменные для внесения данных в массив карточек с фото
 const titleInputCard = document.querySelector(".popup-form__input_type_place");
 const imageInputCard = document.querySelector(".popup-form__input_type_url");
@@ -106,39 +101,13 @@ const handleSubmitProfileForm = (evt) => {
   closePopup(popupEditProfile);
 }
 popupForm.addEventListener("submit", handleSubmitProfileForm);
-//Добавление карточек из массива
-const createCard = (card) => {
-  const elementsCard = templateElement.content.querySelector(".element-item").cloneNode(true);
-  const imageCard = elementsCard.querySelector(".element-item__image");
-  const titleCard = elementsCard.querySelector(".element-item__title");
-  const imageFullscreenClick = elementsCard.querySelector(".element-item__image");
-  //Кнопки лайка
-  const likeButton = elementsCard.querySelector(".element-item__like");
-  const deleteButton = elementsCard.querySelector(".element-item__trash");
-  imageCard.src = card.link;
-  imageCard.alt = card.name;
-  titleCard.textContent = card.name;
-  //включение и выключение лайка
-  likeButton.addEventListener("click", (evt) => {
-    evt.target.classList.toggle("element-item__like_active");
-  });
-  deleteButton.addEventListener("click", (evt) => {
-    elementsCard.remove();
-  });
-  //Внесение данных из массива
-  imageFullscreenClick.addEventListener("click", () => {
-    imageFullscreen.src = card.link;
-    imageFullscreen.alt = card.name;
-    imageTitle.textContent = card.name;
-    openPopup(imagePopup);
-  });
-  return elementsCard;
-};
-const addNewCard = (card) => {
-  elements.prepend(createCard(card));
-};
-//Вставка карточек из формы
-const addCard = (evt) => {
+
+const createCard = (item) => {
+  const card = new Card(item, '.element-template');
+  const cardElement = card.addCard();
+  return cardElement;
+}
+const publicationCard = (evt) => {
   evt.preventDefault();
   const card = {};
   card.name = titleInputCard.value;
@@ -147,9 +116,13 @@ const addCard = (evt) => {
   closePopup(popupAddCard);
   formPopupCard.reset();
 };
+const addNewCard = (card) => {
+  elements.prepend(createCard(card));
+};
 const addNewElements = elementsCards.map((card) => {
   return createCard(card);
 });
 elements.append(...addNewElements);
-formPopupCard.addEventListener("submit", addCard);
+formPopupCard.addEventListener("submit", publicationCard);
 
+export { openPopup };
