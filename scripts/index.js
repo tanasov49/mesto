@@ -1,4 +1,5 @@
 import { elementsCards, Card} from './cards.js';
+import { validationConfig, FormValidator } from './validate.js';
 //Закрытие по клавише ESC
 const closeKeyEsc = (evt) => {
   if (evt.key === 'Escape') {
@@ -30,10 +31,7 @@ const btnEditProfile = document.querySelector(".profile__click-profile");
 const popupClose = document.querySelector(".popup__close");
 //Контейнер профиля
 const popupEditProfile = document.querySelector(".popup_edit-profile");
-//Кнопка сохранения профиля
-const btnSafeProfile =document.querySelector('.popup-form__save-btn_profile');
-//Кнопка сохранения карточки
-const btnSafeCard =document.querySelector('.popup-form__save-btn_card');
+
 //Контейнер карточки
 const popupAddCard = document.querySelector(".popup_add-card");
 const formPopupCard = document.querySelector('.popup-form_card');
@@ -44,7 +42,7 @@ const imagePopup = document.querySelector(".popup_image");
 //Закрытие фото
 const btnCloseImage = imagePopup.querySelector(".popup__close");
 //Событие отправки
-const popupForm = document.querySelector(".popup-form");
+const popupEditForm = document.querySelector(".popup-form");
 //Добавление карточки
 const btnFormCard = document.querySelector(".profile__add-element");
 //Переменные профиля
@@ -57,25 +55,14 @@ const titleInputCard = document.querySelector(".popup-form__input_type_place");
 const imageInputCard = document.querySelector(".popup-form__input_type_url");
 //Блок карточек
 const elements = document.querySelector(".elements");
-const templateElement = document.querySelector(".element-template");
 //Закрытие редактирования профиля
 
-const validationConfig = {
-  formSelector: '.popup-form',
-  inputSelector: '.popup-form__input',
-  submitButtonSelector: '.popup-form__save-btn',
-  inactiveButtonClass: 'popup-form__save-btn_disabled',
-  inputErrorClass: 'popup-form__input_error',
-  errorTextClass: 'popup-form__input-error_active'
-};
+
 popupClose.addEventListener("click", () => {
   closePopup(popupEditProfile);
 });
 //Открытие формы добавления карточки
-btnFormCard.addEventListener("click", () => {
-  openPopup(popupAddCard);
-  disableButtonElement(btnSafeCard, validationConfig);
-});
+
 //Закртытие без добавления карточки
 popupCloseCard.addEventListener("click", () => {
   closePopup(popupAddCard);
@@ -85,23 +72,6 @@ btnCloseImage.addEventListener("click", function () {
   closePopup(imagePopup);
 });
 //Редатирование профиля
-const editProfile = () => {
-  textName.value = profileTitle.textContent;
-  textSkill.value = profileSubtitle.textContent;
-  activeButtonElement(btnSafeProfile, validationConfig);
-  openPopup(popupEditProfile);
-}
-btnEditProfile.addEventListener("click", () => {
-  editProfile();
-});
-const handleSubmitProfileForm = (evt) => {
-  evt.preventDefault();
-  profileTitle.textContent = textName.value;
-  profileSubtitle.textContent = textSkill.value;
-  closePopup(popupEditProfile);
-}
-popupForm.addEventListener("submit", handleSubmitProfileForm);
-
 const createCard = (item) => {
   const card = new Card(item, '.element-template');
   const cardElement = card.addCard();
@@ -123,6 +93,29 @@ const addNewElements = elementsCards.map((card) => {
   return createCard(card);
 });
 elements.append(...addNewElements);
-formPopupCard.addEventListener("submit", publicationCard);
 
+
+const editProfileValidation = new FormValidator(validationConfig, popupEditForm);
+const addCardValidation = new FormValidator(validationConfig, formPopupCard);
+
+const handleSubmitProfileForm = (evt) => {
+  evt.preventDefault();
+  profileTitle.textContent = textName.value;
+  profileSubtitle.textContent = textSkill.value;
+  closePopup(popupEditProfile);
+}
+btnEditProfile.addEventListener("click", () => {
+  textName.value = profileTitle.textContent;
+  textSkill.value = profileSubtitle.textContent;
+  editProfileValidation.toggleButtonState();
+  openPopup(popupEditProfile);
+});
+btnFormCard.addEventListener("click", () => {
+  addCardValidation.toggleButtonState();
+  openPopup(popupAddCard);
+});
+popupEditForm.addEventListener("submit", handleSubmitProfileForm);
+formPopupCard.addEventListener('submit', publicationCard);
+editProfileValidation.enableValidation();
+addCardValidation.enableValidation();
 export { openPopup };
