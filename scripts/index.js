@@ -106,11 +106,11 @@ btnEditProfile.addEventListener("click", () => {
   editProfileValidation.toggleButtonState();
   openPopup(popupEditProfile);
 });
+popupEditForm.addEventListener("submit", handleSubmitProfileForm);
 btnFormCard.addEventListener("click", () => {
   addCardValidation.toggleButtonState();
   openPopup(popupAddCard);
 });
-popupEditForm.addEventListener("submit", handleSubmitProfileForm);
 formPopupCard.addEventListener('submit', publicationCard);
 editProfileValidation.enableValidation();
 addCardValidation.enableValidation();

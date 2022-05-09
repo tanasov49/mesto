@@ -14,20 +14,18 @@ class FormValidator {
     this._inactiveButton = config.inactiveButtonClass;
     this._inputError = config.inputErrorClass;
     this._errorText = config.errorTextClass;
-
-    this._inputList = 
-    Array.from(this._form.querySelectorAll(this._input));
+    this._inputList = Array.from(this._form.querySelectorAll(this._input));
     this._buttonElement = this._form.querySelector(this._submitButton);
   }
   _setEventListeners() {
     this.toggleButtonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
+        this._checkInputValidity(inputElement);
         this.toggleButtonState(this._inputList);
       });
     });
   }
-
   _enableButton = () => {
     this._buttonElement.disabled = false;
     this._buttonElement.classList.remove(this._inactiveButton);
@@ -71,5 +69,8 @@ class FormValidator {
   enableValidation = () => {
     this._setEventListeners();
   };
+  resetValidation = () => {
+    this._form.reset();
+  }
 }
 export { validationConfig, FormValidator };
