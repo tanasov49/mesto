@@ -31,7 +31,6 @@ const btnEditProfile = document.querySelector(".profile__click-profile");
 const popupClose = document.querySelector(".popup__close");
 //Контейнер профиля
 const popupEditProfile = document.querySelector(".popup_edit-profile");
-
 //Контейнер карточки
 const popupAddCard = document.querySelector(".popup_add-card");
 const formPopupCard = document.querySelector('.popup-form_card');
@@ -57,12 +56,9 @@ const imageInputCard = document.querySelector(".popup-form__input_type_url");
 const elements = document.querySelector(".elements");
 //Закрытие редактирования профиля
 
-
 popupClose.addEventListener("click", () => {
   closePopup(popupEditProfile);
 });
-//Открытие формы добавления карточки
-
 //Закртытие без добавления карточки
 popupCloseCard.addEventListener("click", () => {
   closePopup(popupAddCard);

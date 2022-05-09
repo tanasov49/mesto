@@ -59,14 +59,14 @@ class FormValidator {
   _showInputError = (inputElement, errorMessage) => {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputError);
-    errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorText);
+    errorElement.textContent = errorMessage;
   };
   _hideInputError = (inputElement) => {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._inputError);
-    errorElement.textContent = '';
     errorElement.classList.remove(this._errorText);
+    errorElement.textContent = '';
   };
   enableValidation = () => {
     this._setEventListeners();
