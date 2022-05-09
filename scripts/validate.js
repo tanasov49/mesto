@@ -69,8 +69,5 @@ class FormValidator {
   enableValidation = () => {
     this._setEventListeners();
   };
-  resetValidation = () => {
-    this._form.reset();
-  }
 }
 export { validationConfig, FormValidator };
