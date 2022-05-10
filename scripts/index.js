@@ -1,30 +1,6 @@
 import { elementsCards, Card} from './cards.js';
 import { validationConfig, FormValidator } from './validate.js';
-//Закрытие по клавише ESC
-const closeKeyEsc = (evt) => {
-  if (evt.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
-}
-//Закрытие в пустой области кликом
-const closeOverlayPopup = (evt) => {
-  if (evt.target.classList.contains('popup_opened')) {
-    closePopup(evt.target);
-  }
-}
-//Открытие popup
-const openPopup = (popup) => {
-  popup.classList.add("popup_opened");
-  document.addEventListener('keyup', closeKeyEsc);
-  document.addEventListener('click', closeOverlayPopup);
-}
-//Закрытие popup
-const closePopup = (popup) => {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener('keyup', closeKeyEsc);
-  document.removeEventListener('click', closeOverlayPopup);
-}
+
 //Кнопка профиля
 const btnEditProfile = document.querySelector(".profile__click-profile");
 //Кнопка закрытия
@@ -53,9 +29,33 @@ const profileSubtitle = document.querySelector(".profile__subtitle");
 const titleInputCard = document.querySelector(".popup-form__input_type_place");
 const imageInputCard = document.querySelector(".popup-form__input_type_url");
 //Блок карточек
-const elements = document.querySelector(".elements");
+const elementsList = document.querySelector(".elements");
+//Закрытие по клавише ESC
+const closeKeyEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+  }
+}
+//Закрытие в пустой области кликом
+const closeOverlayPopup = (evt) => {
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target);
+  }
+}
+//Открытие popup
+const openPopup = (popup) => {
+  popup.classList.add("popup_opened");
+  document.addEventListener('keyup', closeKeyEsc);
+  document.addEventListener('click', closeOverlayPopup);
+}
+//Закрытие popup
+const closePopup = (popup) => {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener('keyup', closeKeyEsc);
+  document.removeEventListener('click', closeOverlayPopup);
+}
 //Закрытие редактирования профиля
-
 popupClose.addEventListener("click", () => {
   closePopup(popupEditProfile);
 });
@@ -75,20 +75,21 @@ const createCard = (item) => {
 }
 const publicationCard = (evt) => {
   evt.preventDefault();
-  const card = {};
-  card.name = titleInputCard.value;
-  card.link = imageInputCard.value;
+  const card = {
+    name: titleInputCard.value,
+    link: imageInputCard.value
+  };
   addNewCard(card);
   closePopup(popupAddCard);
   formPopupCard.reset();
 };
 const addNewCard = (card) => {
-  elements.prepend(createCard(card));
+  elementsList.prepend(createCard(card));
 };
 const addNewElements = elementsCards.map((card) => {
   return createCard(card);
 });
-elements.append(...addNewElements);
+elementsList.append(...addNewElements);
 
 
 const editProfileValidation = new FormValidator(validationConfig, popupEditForm);
