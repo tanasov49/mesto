@@ -1,6 +1,5 @@
 import { elementsCards, Card} from './cards.js';
 import { validationConfig, FormValidator } from './validate.js';
-
 //Кнопка профиля
 const btnEditProfile = document.querySelector(".profile__click-profile");
 //Кнопка закрытия
