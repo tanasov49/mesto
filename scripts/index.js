@@ -1,4 +1,5 @@
-import { elementsCards, Card} from './cards.js';
+import { Card} from './cards.js';
+import { elementsCards } from '../utils/elementsCards.js'
 import { validationConfig, FormValidator } from './validate.js';
 //Кнопка профиля
 const btnEditProfile = document.querySelector(".profile__click-profile");
@@ -36,24 +37,24 @@ const closeKeyEsc = (evt) => {
     closePopup(popupOpened);
   }
 }
-//Закрытие в пустой области кликом
-const closeOverlayPopup = (evt) => {
-  if (evt.target.classList.contains('popup_opened')) {
-    closePopup(evt.target);
-  }
-}
-//Открытие popup
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
   document.addEventListener('keyup', closeKeyEsc);
-  document.addEventListener('click', closeOverlayPopup);
 }
 //Закрытие popup
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
   document.removeEventListener('keyup', closeKeyEsc);
-  document.removeEventListener('click', closeOverlayPopup);
 }
+// Массив элементов Popup для закрытия в пустой области
+const popupList = Array.from(document.querySelectorAll('.popup'));
+popupList.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close')) {
+      closePopup(popup);
+    };
+  });
+});
 //Закрытие редактирования профиля
 popupClose.addEventListener("click", () => {
   closePopup(popupEditProfile);
