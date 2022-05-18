@@ -4,11 +4,11 @@ import { openPopup } from "./index.js";
     constructor(data, template) {
       this._link = data.link;
       this._name = data.name;
-      this._template = template;
+      this._cardSelector = template;
     }
 
     _getTemplate() {
-      const cardElement = document.querySelector(this._template)
+      const cardElement = document.querySelector(this._cardSelector)
       .content
       .querySelector('.element-item')
       .cloneNode(true);
