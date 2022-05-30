@@ -34,13 +34,14 @@ const popupAddCards = new PopupWithProfile({
   popupSelector: '.popup_add-card',
   processFormSubmission: (item) => {
     cardsList.prependItem(createCard(item));
+    popupProfileForm.close();
   }
 })
 popupAddCards.setEventListeners();
 const popupProfileForm = new PopupWithProfile({
   popupSelector: '.popup_edit-profile',
   processFormSubmission: (item) => {
-    userProfile.getUserInfo(item);
+    userProfile.setProfileInfo(item);
     popupProfileForm.close();
   }
 });
