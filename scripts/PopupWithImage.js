@@ -8,7 +8,7 @@ export class PopupWithImage extends Popup {
     }
     open(place, image) {
         this.popupFullImage.src = image;
-        this.popupFullImageText.alt = place;
+        this.popupFullImage.alt = place;
         this.popupFullImageText.textContent = place;
         super.open();
     }

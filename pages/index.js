@@ -2,8 +2,8 @@ import { validationConfig, elementsCards, btnEditProfile, popupClose, popupEditP
 import { Card } from '../scripts/Card.js';
 import { Section } from '../scripts/Section.js';
 import { PopupWithImage } from '../scripts/PopupWithImage.js';
-import { PopupWithProfile } from '../scripts/PopupWithProfile.js';
-import { ProfileInfo } from '../scripts/ProfileInfo.js';
+import { PopupWithForm } from '../scripts/PopupWithForm.js';
+import { UserInfo } from '../scripts/UserInfo.js';
 import { FormValidator } from '../scripts/FormValidator.js';
 
 const openImagePopup = new PopupWithImage(validationConfig.popupImageSelector);
@@ -27,9 +27,9 @@ const cardsList = new Section({
 validationConfig.cardListSelector);
 cardsList.renderItems();
 
-const userProfile = new ProfileInfo({profileTitle, profileSubtitle});
+const userProfile = new UserInfo({profileTitle, profileSubtitle});
 
-const popupAddCards = new PopupWithProfile({
+const popupAddCards = new PopupWithForm({
   popupSelector: '.popup_add-card',
   processFormSubmission: (item) => {
     console.log(item);
@@ -37,7 +37,7 @@ const popupAddCards = new PopupWithProfile({
   }
 });
 popupAddCards.setEventListeners();
-const popupProfileForm = new PopupWithProfile({
+const popupProfileForm = new PopupWithForm({
   popupSelector: '.popup_edit-profile',
   processFormSubmission: (item) => {
     userProfile.setProfileInfo(item);

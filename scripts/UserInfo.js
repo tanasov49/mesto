@@ -1,4 +1,4 @@
-export class ProfileInfo {
+export class UserInfo {
     constructor({profileTitle, profileSubtitle}) {
         this._profileName = profileTitle;
         this._profileActivity = profileSubtitle;
