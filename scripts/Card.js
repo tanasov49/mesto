@@ -1,4 +1,4 @@
-export class Card {
+class Card {
     constructor(name, link, alt, cardSelector, {handleCardClick}) {
       this._link = link;
       this._name = name;
@@ -19,7 +19,7 @@ export class Card {
     }
     renderCard() {
       this._elementImage.src = this._link;
-      this._elementImage.alt = this._alt;
+      this._elementImage.alt = this._name;
       this._element.querySelector('.element-item__title').textContent = this._name;
       this._setEventListeners();
       return this._element;
@@ -37,7 +37,7 @@ export class Card {
       this._element.remove();
     }
     _likeClickHandler = () => {
-      this._buttonLike.classList.toggle('.element-item__like_active');
+      this._buttonLike.classList.toggle('element-item__like_active');
     }
     _openPopupWithImage() {
       this._handleCardClick(
@@ -45,4 +45,5 @@ export class Card {
         this._link
       )
     }
-  }
+  };
+  export {Card};

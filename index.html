@@ -27,9 +27,9 @@
                 <h2 class="popup__title">Новое место</h2>
                 <button class="popup__close" type="button"></button>
                 <form name="form_add_card" action="#" class="popup-form popup-form_card" novalidate>
-                    <input id="place-input" type="text" class="popup-form__input popup-form__input_type_place" placeholder="Название" name="place" required minlength="2" maxlength="30">
+                    <input id="place-input" type="text" class="popup-form__input popup-form__input_type_place" placeholder="Название" name="name" required minlength="2" maxlength="30">
                     <span class="popup-form__input-error place-input-error"></span>
-                    <input id="url-input" type="url" class="popup-form__input popup-form__input_type_url" placeholder="Ссылка на картинку" name="skill" required>
+                    <input id="url-input" type="url" class="popup-form__input popup-form__input_type_url" placeholder="Ссылка на картинку" name="link" required>
                     <span class="popup-form__input-error url-input-error"></span>
                     <button type="submit"  class="popup-form__save-btn popup-form__save-btn_card">Создать</button>
                 </form>
@@ -65,7 +65,7 @@
     </div>
     <template class="element-template">
         <li class="element-item">
-            <img src="#" class="element-item__image" alt="Название картинки">
+            <img src="#" class="element-item__image">
             <h3 class="element-item__title"></h3>
             <button class="element-item__like" type="button"></button>
             <button class="element-item__trash" type="button"></button>

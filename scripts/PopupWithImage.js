@@ -6,10 +6,10 @@ export class PopupWithImage extends Popup {
         this.popupFullImage = this._popup.querySelector('.popup-image__fullscreen-image');
         this.popupFullImageText = this._popup.querySelector('.popup-image__title');
     }
-    open(name, link) {
-        this.popupFullImage.src = link;
-        this.popupFullImageText.alt = name;
-        this.popupFullImageText.textContent = name;
+    open(place, image) {
+        this.popupFullImage.src = image;
+        this.popupFullImageText.alt = place;
+        this.popupFullImageText.textContent = place;
         super.open();
     }
 }

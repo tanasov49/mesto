@@ -31,7 +31,8 @@ export const validationConfig = {
     submitButtonSelector: '.popup-form__save-btn',
     inactiveButtonClass: 'popup-form__save-btn_disabled',
     inputErrorClass: 'popup-form__input_error',
-    errorTextClass: 'popup-form__input-error_active'
+    errorTextClass: 'popup-form__input-error_active',
+    cardListSelector: '.elements'
   };
   //Кнопка профиля
 export const btnEditProfile = document.querySelector(".profile__click-profile");

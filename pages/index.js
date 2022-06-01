@@ -1,6 +1,5 @@
 import { validationConfig, elementsCards, btnEditProfile, popupClose, popupEditProfile, popupAddCard, formPopupCard, popupCloseCard, imagePopup, btnCloseImage, popupEditForm, btnFormCard, textName, textSkill, profileTitle, profileSubtitle, titleInputCard, imageInputCard, elementsList, popupFullImage, popupFullImageText } from '../src/utils/constants.js';
 import { Card } from '../scripts/Card.js';
-import { Popup } from '../scripts/Popup.js';
 import { Section } from '../scripts/Section.js';
 import { PopupWithImage } from '../scripts/PopupWithImage.js';
 import { PopupWithProfile } from '../scripts/PopupWithProfile.js';
@@ -11,7 +10,8 @@ const openImagePopup = new PopupWithImage(validationConfig.popupImageSelector);
 openImagePopup.setEventListeners();
 
 const createCard = (item) => {
-  const card = new Card(item.name, item.link, item.alt, '.element-template', {
+  const card = new Card(item.name, item.link, item.alt, '.element-template',
+  {
     handleCardClick: () => {
       openImagePopup.open(item.name, item.link);
     }
@@ -22,10 +22,9 @@ const cardsList = new Section({
   items: elementsCards,
   renderer: (item) => {
     cardsList.addItem(createCard(item));
-  }
+  },
 },
-validationConfig.cardListSelector
-)
+validationConfig.cardListSelector);
 cardsList.renderItems();
 
 const userProfile = new ProfileInfo({profileTitle, profileSubtitle});
@@ -33,10 +32,10 @@ const userProfile = new ProfileInfo({profileTitle, profileSubtitle});
 const popupAddCards = new PopupWithProfile({
   popupSelector: '.popup_add-card',
   processFormSubmission: (item) => {
+    console.log(item);
     cardsList.prependItem(createCard(item));
-    popupProfileForm.close();
   }
-})
+});
 popupAddCards.setEventListeners();
 const popupProfileForm = new PopupWithProfile({
   popupSelector: '.popup_edit-profile',
