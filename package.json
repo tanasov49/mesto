@@ -1,7 +1,7 @@
 {
   "name": "mesto",
-  "version": "0.0.1",
-  "description": "Мой второй макет. В данном проекте я использую, изученные приемы в прошлом проекте (флексы, гриды, оптимизацию под разные разрешения). Также я начинаю использовать JS технологии для \"оживления\" сайта.",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/tanasov49/mesto.git"
   },
-  "author": "Aleksandr Tanasov",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tanasov49/mesto/issues"
