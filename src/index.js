@@ -1,3 +1,4 @@
+import '../pages/index.css';
 import {validationConfig, elementsCards, btnEditProfile, formPopupCard, popupEditForm, btnFormCard, textName, textSkill, profileTitle, profileSubtitle} from '../components/constants.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
