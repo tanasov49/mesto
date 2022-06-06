@@ -46,8 +46,8 @@ const popupProfileForm = new PopupWithForm({
 });
 popupProfileForm.setEventListeners();
 
-const addCardValidation = new FormValidator(validationConfig, popupEditForm);
-const profileFormValidation = new FormValidator(validationConfig, formPopupCard);
+const addCardValidation = new FormValidator(validationConfig, formPopupCard);
+const profileFormValidation = new FormValidator(validationConfig, popupEditForm);
 addCardValidation.enableValidation();
 profileFormValidation.enableValidation();
 
