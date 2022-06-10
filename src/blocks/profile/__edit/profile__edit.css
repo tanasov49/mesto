@@ -1,0 +1,23 @@
+.profile__edit {
+   width: 26px;
+   height: 26px;
+   position: relative;
+   left: 47px;
+   top: 47px;
+   visibility: hidden;
+   z-index: 1;
+   grid-column: 1;
+   grid-row: 1 / 2;
+   transition: opacity .5s linear;
+}
+.profile__image:hover + .profile__edit {
+    visibility: visible;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+    .profile__edit {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: center;
+        left: 0;
+    }
+}

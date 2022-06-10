@@ -4,6 +4,7 @@ export class Popup {
       this.close = this.close.bind(this);
       this._handleEscClose = this._handleEscClose.bind(this);
       this._closeWithClick = this._closeWithClick.bind(this);
+      this._popupButtonSafe = this._popup.querySelector('.popup-form__save-btn')
     }
     open() {
       this._popup.classList.add('popup_opened');
@@ -29,6 +30,13 @@ export class Popup {
     _closeWithClick(evt) {
       if (evt.currentTarget === evt.target) {
         this.close();
+      }
+    }
+    loading(loading, text) {
+      if (loading) {
+        this._popupButtonSafe.textContent = "Сохранение..."
+      } else {
+        this._popupButtonSafe.textContent = text;
       }
     }
   }

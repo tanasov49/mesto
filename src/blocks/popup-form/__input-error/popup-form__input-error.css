@@ -7,6 +7,6 @@
     opacity: 0;
     top: calc(40% + 4px);
 }
-.popup-form__input-error:last-of-type {
+.popup-form__input-error:nth-child(4) {
     top: calc(60% + 6px);
 }
