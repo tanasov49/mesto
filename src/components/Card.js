@@ -40,7 +40,11 @@ export class Card {
    this._deleteCardButton.addEventListener('click', () => {
      this._actionDeleteCardClick(this);
    });
-   this._placeButtonLike.addEventListener('click', this._handleLikeClick(this));
+
+   this._placeButtonLike.addEventListener('click', () => {
+     this._handleLikeClick(this);
+   });
+
    this._elementImage.addEventListener('click', () => {
      this._openPopupWithImage();
    });

@@ -46,26 +46,26 @@ export class Api {
       .then(this._checkResponse)
     }
     deleteCard(id) {
-      return fetch(`${this._address}/cards/${id}`, {
+      return fetch(`${this._address}/cards/likes/${id}`, {
         method: 'DELETE',
         headers: this._token,
       })
       .then(this._checkResponse)
     }
-    addLike(id) {
-      return fetch(`${this._address}/cards/likes${id}`, {
-        method: 'PUT',
-        headers: this._token,
-      })
-      .then(this._checkResponse)
-    }
-    removelike(id) {
-      return fetch(`${this._address}/cards/likes${id}`, {
-        method: 'DELETE',
-        headers: this._token,
-      })
-      .then(this._checkResponse)
-    }
+  addLike(id) {
+    return fetch(`${this._address}/cards/likes/${id}`, {
+      method: 'PUT',
+      headers: this._token,
+    })
+    .then(this._checkResponse)
+  }
+  removeLike(id) {
+    return fetch(`${this._address}/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: this._token,
+    })
+    .then(this._checkResponse)
+  }
     changeUserAvatar(item) {
       return fetch(`${this._address}/users/me/avatar`, {
         method: 'PATCH',

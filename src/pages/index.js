@@ -8,20 +8,18 @@ import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Api } from '../components/Api.js'
 import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
-
+// Валидация форм
 const addCardValidation = new FormValidator(validationConfig, formPopupCard);
 const profileFormValidation = new FormValidator(validationConfig, popupEditForm);
 const imageFormValidation = new FormValidator(validationConfig, popupEditImage);
+const openImagePopup = new PopupWithImage(validationConfig.popupImageSelector);
 addCardValidation.enableValidation();
 profileFormValidation.enableValidation();
 imageFormValidation.enableValidation();
-
-
-const openImagePopup = new PopupWithImage(validationConfig.popupImageSelector);
 openImagePopup.setEventListeners();
 
 const userProfile = new UserInfo({ profileTitle, profileSubtitle, popupImageProfile });
-
+// Импорт данных с Api
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-42',
   token: {
@@ -40,6 +38,7 @@ Promise.all([
 }).catch(err => {
   console.log(`Error: ${err}`);
 })
+//Импорт карточек из Json
 const createCard = (item) => {
   const card = new Card(
     item,
@@ -93,7 +92,7 @@ const cardsList = new Section({
 
 const popupDeleteCard = new PopupWithConfirm('.popup_safe-confirm'); /*  */
 popupDeleteCard.setEventListeners();
-
+//Добавление карточек
 const popupAddCards = new PopupWithForm({
   popupSelector: '.popup_add-card',
   processFormSubmission: (item) => {
@@ -116,6 +115,7 @@ btnFormCard.addEventListener('click', () => {
   addCardValidation.resetValidation();
   popupAddCards.open();
 })
+// Редактирование профиля
 const popupProfileForm = new PopupWithForm({
   popupSelector: '.popup_edit-profile',
   processFormSubmission: (item) => {
@@ -123,6 +123,7 @@ const popupProfileForm = new PopupWithForm({
     api.editProfile(item)
     .then(result => {
       userProfile.setProfileInfo(result);
+
     })
     .catch(err => {
       console.log(`Ошибка в профиле пользователя: ${err}`);
@@ -142,7 +143,7 @@ btnEditProfile.addEventListener('click', () => {
   profileFormValidation.resetValidation();
   popupProfileForm.open();
 });
-
+// Изменение картинки
 const popupProfileImage = new PopupWithForm({
   popupSelector: '.popup_update-profile-image',
   processFormSubmission: (item) => {
