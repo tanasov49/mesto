@@ -3,7 +3,7 @@ export class Api {
       this._address = address;
       this._token = token;
     }
-      _checkResponse(res) {
+    _checkResponse(res) {
           if (res.ok) {
               return res.json();
           }
@@ -29,7 +29,7 @@ export class Api {
         headers: this._token,
         body: JSON.stringify({
           name: item.name,
-          about: item.activity
+          about: item.about
         })
       })
       .then(this._checkResponse)

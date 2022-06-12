@@ -1,5 +1,5 @@
 import './index.css';
-import {validationConfig, btnEditProfile, formPopupCard, popupEditForm, btnFormCard, textName, textSkill, profileTitle, profileSubtitle, btnImageProfile, popupEditImage} from '../utils/constants.js';
+import {validationConfig, btnEditProfile, formPopupCard, popupEditForm, btnFormCard, textName, textSkill, profileTitle, profileSubtitle, btnImageProfile, popupEditImage, popupImageProfile} from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
@@ -7,19 +7,20 @@ import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Api } from '../components/Api.js'
+import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
+
+const addCardValidation = new FormValidator(validationConfig, formPopupCard);
+const profileFormValidation = new FormValidator(validationConfig, popupEditForm);
+const imageFormValidation = new FormValidator(validationConfig, popupEditImage);
+addCardValidation.enableValidation();
+profileFormValidation.enableValidation();
+imageFormValidation.enableValidation();
+
 
 const openImagePopup = new PopupWithImage(validationConfig.popupImageSelector);
 openImagePopup.setEventListeners();
 
-// const createCard = (item) => {
-//   const card = new Card(item.name, item.link, item.alt, '.element-template',
-//   {
-//     handleCardClick: () => {
-//       openImagePopup.open(item.name, item.link);
-//     }
-//   });
-//   return card.renderCard();
-// }
+const userProfile = new UserInfo({ profileTitle, profileSubtitle, popupImageProfile });
 
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-42',
@@ -35,7 +36,7 @@ Promise.all([
 ]).then(([cards, profile]) => {
   actualUserId = profile._id;
   cardsList.renderItems(cards);
-  userProfile.setUserInfo(profile);
+  userProfile.setProfileInfo(profile);
 }).catch(err => {
   console.log(`Error: ${err}`);
 })
@@ -89,11 +90,14 @@ const cardsList = new Section({
     cardsList.addItem(createCard(item));
   },
 }, validationConfig.cardListSelector);
-const userProfile = new UserInfo({profileTitle, profileSubtitle});
+
+const popupDeleteCard = new PopupWithConfirm('.popup_safe-confirm'); /*  */
+popupDeleteCard.setEventListeners();
+
 const popupAddCards = new PopupWithForm({
   popupSelector: '.popup_add-card',
   processFormSubmission: (item) => {
-    popupAddCards.loading(true);
+    popupAddCards.loading(true, 'Сохранение...');
     api.addNewCard(item)
       .then(result => {
         cardsList.prependItem(createCard(result));
@@ -103,52 +107,56 @@ const popupAddCards = new PopupWithForm({
         console.log(`Ошибка добавления: ${err}`);
       })
       .finally(() => {
-        popupAddCards.loading(false);
+        popupAddCards.loading(false, 'Создать');
       })
   }
 });
 popupAddCards.setEventListeners();
-const popupProfileForm = new PopupWithForm({
-  popupSelector: '.popup_edit-profile',
-  processFormSubmission: (item) => {
-    userProfile.setProfileInfo(item);
-    popupProfileForm.close();
-  }
-});
-popupProfileForm.setEventListeners();
-
-const addCardValidation = new FormValidator(validationConfig, formPopupCard);
-const profileFormValidation = new FormValidator(validationConfig, popupEditForm);
-const imageFormValidation = new FormValidator(validationConfig, popupEditImage);
-addCardValidation.enableValidation();
-profileFormValidation.enableValidation();
-imageFormValidation.enableValidation();
-
-btnEditProfile.addEventListener('click', () => {
-  const profile = userProfile.getUserInfo();
-  textName.value = profile.name;
-  textSkill.value = profile.activity;
-  profileFormValidation.resetValidation();
-  popupProfileForm.open();
-});
 btnFormCard.addEventListener('click', () => {
   addCardValidation.resetValidation();
   popupAddCards.open();
 })
+const popupProfileForm = new PopupWithForm({
+  popupSelector: '.popup_edit-profile',
+  processFormSubmission: (item) => {
+    popupProfileForm.loading(true, 'Сохранение...');
+    api.editProfile(item)
+    .then(result => {
+      userProfile.setProfileInfo(result);
+    })
+    .catch(err => {
+      console.log(`Ошибка в профиле пользователя: ${err}`);
+    })
+    .finally(() => {
+      popupProfileForm.close();
+      popupProfileForm.loading(false, 'Сохранить');
+    })
+  }
+});
+popupProfileForm.setEventListeners();
+
+btnEditProfile.addEventListener('click', () => {
+  const profile = userProfile.getUserInfo();
+  textName.value = profile.name;
+  textSkill.value = profile.about;
+  profileFormValidation.resetValidation();
+  popupProfileForm.open();
+});
+
 const popupProfileImage = new PopupWithForm({
   popupSelector: '.popup_update-profile-image',
   processFormSubmission: (item) => {
-    popupProfileImage.loading(true, 'Сохранить');
+    popupProfileImage.loading(true, 'Сохранение...');
     api.changeUserAvatar(item)
       .then(result => {
-        userProfile.setUserInfo(result);
+        userProfile.setProfileInfo(result);
         popupProfileImage.close();
       })
       .catch(err => {
         console.log(`Ошибка в ходе изменения аватара пользователя: ${err}`);
       })
       .finally(() => {
-        popupProfileImage.loading(false);
+        popupProfileImage.loading(false, 'Сохранить');
       })
   }
 })

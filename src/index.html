@@ -15,7 +15,7 @@
                 <form name="myform" action="#" class="popup-form" novalidate>
                     <input id="name-input" type="text" class="popup-form__input popup-form__input_type_name" placeholder="Имя" name="name" required minlength="2" maxlength="40">
                     <span class="popup-form__input-error name-input-error"></span>
-                    <input id="name-skill" type="text" class="popup-form__input popup-form__input_type_skill" placeholder="Навык" name="skill" required minlength="2" maxlength="200">
+                    <input id="name-skill" type="text" class="popup-form__input popup-form__input_type_skill" placeholder="Навык" name="about" required minlength="2" maxlength="200">
                     <span class="popup-form__input-error name-skill-error"></span>
                     <button type="submit"  class="popup-form__save-btn popup-form__save-btn_profile">Сохранить</button>
                 </form>
@@ -52,13 +52,24 @@
                 </form>
             </div>
         </div>
+        <div class="popup popup_safe-confirm">
+            <div class="popup__container">
+                <h2 class="popup__title">Вы уверены?</h2>
+                <button class="popup__close" type="button"></button>
+                <form name="avatar" action="#" class="popup-form popup-form_image" novalidate>
+                    <button type="submit"  class="popup-form__save-btn popup-form__save-btn_confirm">Да</button>
+                </form>
+            </div>
+        </div>
         <header class="header">
             <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="logo logo_header">
         </header>
         <main class="main">
             <section class="profile">
-                <img src="<%=require('./images/profile_image.jpg')%>" alt="Фото профиля" class="profile__image">
-                <img src="<%=require('./images/edit.svg')%>" alt="Редактирование" class="profile__edit">
+                <div class="profile__avatar">
+                    <img src="<%=require('./images/profile_image.jpg')%>" alt="Фото профиля" class="profile__image">
+                    <img src="<%=require('./images/edit.svg')%>" alt="Редактирование" class="profile__edit">
+                </div>
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <p class="profile__subtitle">Исследователь океана</p>
                 <button class="profile__click-profile" type="button"></button>

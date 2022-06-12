@@ -2,20 +2,20 @@ export class Card {
   constructor(data, actualUserId, cardSelector, {handleCardClick, actionDeleteCardClick, handleLikeClick}) {
     this._name = data.name;
     this._link = data.link;
+    this._alt = data.name;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._element = this._getTemplate();
-    this._elementImage = this._element.querySelector('.element-item__image');
     this._likes = data.likes ?? [];
     this._cardId = data._id;
-    this._owner = data.owner;
+    this._ownerId = data.owner._id;
     this._actualUserId = actualUserId;
-    this._alt = data.name;
-    this._deleteCardButton = this._element.querySelector('.element-item__trash');
-    this._placeButtonLike = this._element.querySelector('.element-item__like');
     this._handleLikeClick = handleLikeClick;
     this._actionDeleteCardClick = actionDeleteCardClick;
-    this._likesCounter = this._element.querySelector('.element-item__like-counter');
+    this._elementImage = this._element.querySelector('.element-item__image');
+    this._deleteCardButton = this._element.querySelector('.element-item__trash');
+    this._placeButtonLike = this._element.querySelector('.element-item__like');
+    this._likeCounter = this._element.querySelector('.element-item__like-counter');
   }
 
   _getTemplate() {
@@ -40,7 +40,7 @@ export class Card {
    this._deleteCardButton.addEventListener('click', () => {
      this._actionDeleteCardClick(this);
    });
-   this._placeButtonLike.addEventListener('click', this._handleLikeClick);
+   this._placeButtonLike.addEventListener('click', this._handleLikeClick(this));
    this._elementImage.addEventListener('click', () => {
      this._openPopupWithImage();
    });
@@ -51,7 +51,7 @@ export class Card {
 };
 
 upgradeLikes() {
-  this._likesCounter.textContent = this._likes.length;
+  this._likeCounter.textContent = this._likes.length;
   if (this.whenLiked()) {
     this._placeButtonLike.classList.add('element-item__like_active');
   } else {
@@ -72,14 +72,14 @@ _openPopupWithImage() {
 };
 
 _iconCardDeleteIsDisplayed() {
-  if (this._owner === this._actualUserId) {
-    this._deleteCardButton.classList.add('cards__delete_type_visible');
+  if (this._ownerId === this._actualUserId) {
+    this._deleteCardButton.classList.add('element-item__trash_visible');
   } else {
-    this._deleteCardButton.classList.remove('cards__delete_type_visible');
+    this._deleteCardButton.classList.remove('element-item__trash_visible');
   }
 };
 
-deleteClickHandler() {
+deleteCard() {
   this._element.remove();
   this._element = null;
 };
