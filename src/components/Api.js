@@ -1,7 +1,7 @@
 export class Api {
-    constructor({address, token}) {
-      this._address = address;
-      this._token = token;
+    constructor(options) {
+      this.address = options.urlJson;
+      this.headers = options.headers;
     }
     _checkResponse(res) {
           if (res.ok) {
@@ -10,34 +10,34 @@ export class Api {
           return Promise.reject(`Error: ${res.status}`);
       }
     getCards() {
-      return fetch(`${this._address}/cards`, {
+      return fetch(`${this.address}/cards`, {
         method: 'GET',
-        headers: this._token,
+        headers: this.headers,
       }).then(this._checkResponse);
     }
 
     getUser() {
-      return fetch(`${this._address}/users/me`, {
+      return fetch(`${this.address}/users/me`, {
         method: 'GET',
-        headers: this._token,
+        headers: this.headers,
       }).then(this._checkResponse);
     }
 
-    editProfile(item) {
-      return fetch(`${this._address}/users/me`, {
+    editProfile(data) {
+      return fetch(`${this.address}/users/me`, {
         method: 'PATCH',
-        headers: this._token,
+        headers: this.headers,
         body: JSON.stringify({
-          name: item.name,
-          about: item.about
+          name: data.name,
+          about: data.about
         })
       })
       .then(this._checkResponse)
     }
     addNewCard(data) {
-      return fetch(`${this._address}/cards`, {
+      return fetch(`${this.address}/cards`, {
         method: 'POST',
-        headers: this._token,
+        headers: this.headers,
         body: JSON.stringify({
           name: data.name,
           link: data.link
@@ -46,32 +46,32 @@ export class Api {
       .then(this._checkResponse)
     }
     deleteCard(id) {
-      return fetch(`${this._address}/cards/likes/${id}`, {
+      return fetch(`${this.address}/cards/${id}`, {
         method: 'DELETE',
-        headers: this._token,
+        headers: this.headers,
       })
       .then(this._checkResponse)
     }
   addLike(id) {
-    return fetch(`${this._address}/cards/likes/${id}`, {
+    return fetch(`${this.address}/cards/likes/${id}`, {
       method: 'PUT',
-      headers: this._token,
+      headers: this.headers,
     })
     .then(this._checkResponse)
   }
   removeLike(id) {
-    return fetch(`${this._address}/cards/likes/${id}`, {
+    return fetch(`${this.address}/cards/likes/${id}`, {
       method: 'DELETE',
-      headers: this._token,
+      headers: this.headers,
     })
     .then(this._checkResponse)
   }
-    changeUserAvatar(item) {
-      return fetch(`${this._address}/users/me/avatar`, {
+    changeUserAvatar(data) {
+      return fetch(`${this.address}/users/me/avatar`, {
         method: 'PATCH',
-        headers: this._token,
+        headers: this.headers,
         body: JSON.stringify({
-            avatar: item.avatar
+            avatar: data.avatar
         })
       })
       .then(this._checkResponse)

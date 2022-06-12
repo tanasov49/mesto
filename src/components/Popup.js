@@ -4,16 +4,14 @@ export class Popup {
       this.close = this.close.bind(this);
       this._handleEscClose = this._handleEscClose.bind(this);
       this._closeWithClick = this._closeWithClick.bind(this);
-      this._popupButtonSafe = this._popup.querySelector('.popup-form__save-btn')
     }
     open() {
       this._popup.classList.add('popup_opened');
-      this._popup.addEventListener('mousedown', this._closeWithClick);
       document.addEventListener(`keydown`, this._handleEscClose);
     }
     close() {
       this._popup.classList.remove('popup_opened');
-      this._popup.removeEventListener('mousedown', this._closeWithClick);
+      this._popup.addEventListener('mousedown', this._closeWithClick);
       document.removeEventListener(`keydown`, this._handleEscClose);
     }
     setEventListeners() {
@@ -32,11 +30,5 @@ export class Popup {
         this.close();
       }
     }
-    loading(loading, text) {
-      if (loading) {
-        this._popupButtonSafe.textContent = "Сохранение..."
-      } else {
-        this._popupButtonSafe.textContent = text;
-      }
-    }
+
   }

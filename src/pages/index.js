@@ -1,5 +1,5 @@
 import './index.css';
-import {validationConfig, btnEditProfile, formPopupCard, popupEditForm, btnFormCard, textName, textSkill, profileTitle, profileSubtitle, btnImageProfile, popupEditImage, popupImageProfile} from '../utils/constants.js';
+import {validationConfig, btnEditProfile, formPopupCard, popupEditForm, btnFormCard, textName, textSkill, btnImageProfile, popupEditImage, userData} from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
@@ -18,11 +18,10 @@ profileFormValidation.enableValidation();
 imageFormValidation.enableValidation();
 openImagePopup.setEventListeners();
 
-const userProfile = new UserInfo({ profileTitle, profileSubtitle, popupImageProfile });
 // Импорт данных с Api
 const api = new Api({
-  address: 'https://mesto.nomoreparties.co/v1/cohort-42',
-  token: {
+  urlJson: 'https://mesto.nomoreparties.co/v1/cohort-42',
+  headers: {
     authorization: 'e366e191-bdb8-47b8-a6a4-efb11ee70619',
     'Content-Type': 'application/json',
   }
@@ -31,13 +30,14 @@ let actualUserId;
 Promise.all([
   api.getCards(),
   api.getUser()
-]).then(([cards, profile]) => {
-  actualUserId = profile._id;
+]).then(([cards, userData]) => {
+  actualUserId = userData._id;
   cardsList.renderItems(cards);
-  userProfile.setProfileInfo(profile);
+  userProfile.setProfileInfo(userData);
 }).catch(err => {
   console.log(`Error: ${err}`);
 })
+const userProfile = new UserInfo(userData);
 //Импорт карточек из Json
 const createCard = (item) => {
   const card = new Card(
@@ -118,18 +118,17 @@ btnFormCard.addEventListener('click', () => {
 // Редактирование профиля
 const popupProfileForm = new PopupWithForm({
   popupSelector: '.popup_edit-profile',
-  processFormSubmission: (item) => {
+  processFormSubmission: (userData) => {
     popupProfileForm.loading(true, 'Сохранение...');
-    api.editProfile(item)
-    .then(result => {
-      userProfile.setProfileInfo(result);
-
+    api.editProfile(userData)
+    .then((resolve) => {
+      userProfile.setProfileInfo(resolve);
+      popupProfileForm.close();
     })
     .catch(err => {
       console.log(`Ошибка в профиле пользователя: ${err}`);
     })
     .finally(() => {
-      popupProfileForm.close();
       popupProfileForm.loading(false, 'Сохранить');
     })
   }
@@ -146,11 +145,11 @@ btnEditProfile.addEventListener('click', () => {
 // Изменение картинки
 const popupProfileImage = new PopupWithForm({
   popupSelector: '.popup_update-profile-image',
-  processFormSubmission: (item) => {
+  processFormSubmission: (data) => {
     popupProfileImage.loading(true, 'Сохранение...');
-    api.changeUserAvatar(item)
-      .then(result => {
-        userProfile.setProfileInfo(result);
+    api.changeUserAvatar(data)
+      .then(data => {
+        userProfile.setProfileInfo(data);
         popupProfileImage.close();
       })
       .catch(err => {

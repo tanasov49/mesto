@@ -1,18 +1,18 @@
 export class UserInfo {
-    constructor({profileTitle, profileSubtitle, popupImageProfile}) {
-        this._profileName = profileTitle;
-        this._profileActivity = profileSubtitle;
-        this._popupImageProfile = popupImageProfile;
+    constructor({name, about, avatar}) {
+        this._name = document.querySelector(name)
+        this._about = document.querySelector(about);
+        this._avatar = document.querySelector(avatar);
     }
     getUserInfo() {
         return {
-            name: this._profileName.textContent,
-            about: this._profileActivity.textContent
+            name: this._name.textContent,
+            about: this._about.textContent
         }
     }
-    setProfileInfo(item) {
-        this._profileName.textContent = item.name;
-        this._profileActivity.textContent = item.about;
-        this._popupImageProfile.src = item.avatar;
+    setProfileInfo(data) {
+        this._name.textContent = data.name;
+        this._about.textContent = data.about;
+        this._avatar.src = data.avatar;
     }
 }

@@ -45,10 +45,15 @@ export const btnFormCard = document.querySelector(".profile__add-element");
 //Переменные профиля
 export const textName = document.querySelector(".popup-form__input_type_name");
 export const textSkill = document.querySelector(".popup-form__input_type_skill");
-export const profileTitle = document.querySelector(".profile__title");
-export const profileSubtitle = document.querySelector(".profile__subtitle");
+// export const profileTitle = document.querySelector(".profile__title");
+// export const profileSubtitle = document.querySelector(".profile__subtitle");
 export const btnImageProfile = document.querySelector('.profile__avatar');
 export const popupEditImage = document.querySelector('.popup-form_image');
 export const btnDeleteCard = document.querySelector('.element-item__trash');
-export const popupImageProfile = document.querySelector('.profile__image');
+// export const popupImageProfile = document.querySelector('.profile__image');
 
+export const userData = {
+  name: '.profile__title',
+  about: '.profile__subtitle',
+  avatar: '.profile__image'
+}
